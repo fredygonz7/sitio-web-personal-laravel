@@ -35,7 +35,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('projects.create');
     }
 
     /**
@@ -46,7 +46,15 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return request();
+        // Project::create([
+        //     'title' =>  request('title'),
+        //     'description' =>  request('description'),
+        // ]);
+        // como las propiedades tienen el mismo nombre se pueden enviar todas
+        Project::create(request()->all());
+
+        return redirect()->route('projects.index');
     }
 
     /**

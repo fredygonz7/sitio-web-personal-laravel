@@ -21,7 +21,12 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'home')->name('home');
 Route::view('/about', 'about')->name('about');
 
+// muestra la lista de proyectos
 Route::get('/portfolio', 'ProjectController@index')->name('projects.index');
+// muestra el formulario para crear proyecto
+Route::get('/portfolio/create', 'ProjectController@create')->name('projects.create');
+// envia los datos del formulario para crear proyecto
+Route::post('/portfolio', 'ProjectController@store')->name('projects.store');
 Route::get('/portfolio/{id}', 'ProjectController@show')->name('projects.show');
 
 Route::view('/contact', 'contact')->name('contact');
