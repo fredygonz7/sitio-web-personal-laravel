@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>@lang('Contact')</h1>
-    <form action="{{ route('contact') }}" method="POST">
+    <form action="{{ route('contact.store') }}" method="POST">
         @csrf
         <div>
             <input type="text" name="name" placeholder="name..." value="{{ old('name') }}">

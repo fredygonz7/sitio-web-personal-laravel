@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Project;
 
-class PortfolioController extends Controller
+class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,13 +14,18 @@ class PortfolioController extends Controller
      */
     public function index()
     {
-        $portfolio = [
-            ['title' => 'Proyecto #1'],
-            ['title' => 'Proyecto #2'],
-            ['title' => 'Proyecto #3'],
-            ['title' => 'Proyecto #4']
-        ];
-        return view('portfolio', compact('portfolio'));
+        // $portfolio = [
+        //     ['title' => 'Proyecto #1'],
+        //     ['title' => 'Proyecto #2'],
+        //     ['title' => 'Proyecto #3'],
+        //     ['title' => 'Proyecto #4']
+        // ];
+
+        //  Project::orderBy('created_at','DESC')->get(); // es lo mismo utilizar latest sin parametros
+        // $portfolio = Project::latest('updated_at')->get();
+        $projects = Project::latest('updated_at')->paginate(2);// por defecto son 15
+
+        return view('projects.index', compact('projects'));
     }
 
     /**
@@ -51,7 +57,9 @@ class PortfolioController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('projects.show', [
+            'project' => Project::findOrFail($id)
+        ]);
     }
 
     /**
