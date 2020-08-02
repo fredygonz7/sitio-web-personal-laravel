@@ -31,6 +31,8 @@ Route::get('/portfolio/{project}/edit', 'ProjectController@edit')->name('project
 Route::post('/portfolio', 'ProjectController@store')->name('projects.store');
 // muestra el formulario para actualizar proyecto
 Route::patch('/portfolio/{project}', 'ProjectController@update')->name('projects.update');
+// muestra el formulario para actualizar proyecto
+Route::delete('/portfolio/{project}', 'ProjectController@destroy')->name('projects.destroy');
 // muesta un proyecto
 Route::get('/portfolio/{project}', 'ProjectController@show')->name('projects.show');
 

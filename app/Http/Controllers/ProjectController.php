@@ -35,7 +35,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('projects.create');
+        return view('projects.create',[
+            'project' => new Project
+        ]);
         // return redirect()->route('projects.create');
     }
 
@@ -110,8 +112,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        //Project::destroy($id);
+        $project->delete();
+        return redirect()->route('projects.index');
     }
 }
