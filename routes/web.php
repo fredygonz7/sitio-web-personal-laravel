@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,3 +47,5 @@ Route::resource('projects', 'ProjectController');
 
 Route::view('/contact', 'contact')->name('contact');
 Route::post('/contact', 'ContactController@store')->name('contact.store');
+
+Auth::routes(['register' => false]);
