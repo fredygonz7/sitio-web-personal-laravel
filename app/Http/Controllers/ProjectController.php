@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\SaveProjectRequest;
 use App\Project;
 
 class ProjectController extends Controller
@@ -23,7 +23,7 @@ class ProjectController extends Controller
 
         //  Project::orderBy('created_at','DESC')->get(); // es lo mismo utilizar latest sin parametros
         // $portfolio = Project::latest('updated_at')->get();
-        $projects = Project::latest('updated_at')->paginate(2);// por defecto son 15
+        $projects = Project::latest('updated_at')->paginate();// por defecto son 15
 
         return view('projects.index', compact('projects'));
     }
@@ -36,6 +36,7 @@ class ProjectController extends Controller
     public function create()
     {
         return view('projects.create');
+        // return redirect()->route('projects.create');
     }
 
     /**
@@ -44,7 +45,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveProjectRequest $request)
     {
         // return request();
         // Project::create([
@@ -54,12 +55,13 @@ class ProjectController extends Controller
         // como las propiedades tienen el mismo nombre se pueden enviar todas
         // Project::create(request()->all()); // en el modelo -> protected $fillable = ['title','url','description'];
 
-        $fields = request()->validate([
-            'title'         =>  'required',
-            'url'           =>  'required',
-            'description'   =>  'required',
-        ]);
-        Project::create($fields);
+        // $fields = request()->validate([
+        //     'title'         =>  'required',
+        //     'url'           =>  'required',
+        //     'description'   =>  'required',
+        // ]);
+
+        Project::create($request->validated());
         return redirect()->route('projects.index');
     }
 
@@ -84,7 +86,9 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('projects.edit', [
+            'project' => Project::findOrFail($id)
+        ]);
     }
 
     /**
@@ -94,9 +98,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SaveProjectRequest $request, Project $project)
     {
-        //
+        $project->update($request->validated());
+        return redirect()->route('projects.show', $project);
     }
 
     /**

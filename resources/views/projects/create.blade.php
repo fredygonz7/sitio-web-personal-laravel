@@ -5,21 +5,15 @@
 @section('content')
     <h1>@lang('Create new project')</h1>
     
-    @if ($errors->any())
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+    @include('include.validation-errors')
     
     <form method="POST" action="{{ route('projects.store') }}">
         @csrf
-        <label for="">@lang('Title of the project')<input type="text" name="title"></label>
+        <label for="">@lang('Title of the project')<input type="text" name="title" value="{{ old('title') }}"></label>
         <br>
-        <label for="">@lang('Url of the project')<input type="text" name="url"></label>
+        <label for="">@lang('Url of the project')<input type="text" name="url" value="{{ old('url') }}"></label>
         <br>
-        <label for="">@lang('Description of the project')<textarea name="description"></textarea>
+        <label for="">@lang('Description of the project')<textarea name="description">{{ old('description') }}</textarea>
         <br>
         <button>@lang('Send')</button>
     </form>

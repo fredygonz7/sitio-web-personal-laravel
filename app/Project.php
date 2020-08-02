@@ -11,4 +11,5 @@ class Project extends Model
     // {
     //     return 'url';
     // }
+    protected $guarded=[]; 
 }
