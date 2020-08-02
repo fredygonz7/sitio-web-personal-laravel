@@ -52,8 +52,14 @@ class ProjectController extends Controller
         //     'description' =>  request('description'),
         // ]);
         // como las propiedades tienen el mismo nombre se pueden enviar todas
-        Project::create(request()->all());
+        // Project::create(request()->all()); // en el modelo -> protected $fillable = ['title','url','description'];
 
+        $fields = request()->validate([
+            'title'         =>  'required',
+            'url'           =>  'required',
+            'description'   =>  'required',
+        ]);
+        Project::create($fields);
         return redirect()->route('projects.index');
     }
 
