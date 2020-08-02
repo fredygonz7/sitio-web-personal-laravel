@@ -7,6 +7,8 @@
     
     @include('include.validation-errors')
     
+    @include('include.session-status')
+
     <form method="POST" action="{{ route('projects.store') }}">
         @include('projects._form', ['btnText' => __('Send')])
     </form>

@@ -11,12 +11,12 @@
             color: red;
             text-decoration: none;
         }
-
     </style>
 </head>
 
 <body>
     @include('include/nav')
+    {{-- @include('include.session-status') --}}
     @yield('content')
 </body>
 

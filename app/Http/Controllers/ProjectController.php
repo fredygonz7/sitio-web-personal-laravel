@@ -64,7 +64,7 @@ class ProjectController extends Controller
         // ]);
 
         Project::create($request->validated());
-        return redirect()->route('projects.index');
+        return redirect()->route('projects.create')->with('status', __('Project created'));// falto agregar el mensaje de session en las demas funciones
     }
 
     /**
