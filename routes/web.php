@@ -39,6 +39,7 @@ Route::view('/about', 'about')->name('about');
 
 // utilizando route resource para simplificar las rutas
 Route::resource('projects', 'ProjectController');
+    //->middleware('auth'); // solo los usuarios autenticados pueden acceder a estas rutas
 
 // cambiando los link como  estaban antes "portfolio"
 // Route::resource('portfolio', 'ProjectController')

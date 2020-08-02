@@ -4,8 +4,9 @@
 
 @section('content')
     <h1>@lang('Portfolio')</h1>
-    <a href="{{ route('projects.create') }}">@lang('Create project')</a>
-
+    @auth
+        <a href="{{ route('projects.create') }}">@lang('Create project')</a>
+    @endauth
     <ul>
         @forelse ($projects as $projectItem)
         <li> <a href="{{ route('projects.show', $projectItem) }}">{{ $projectItem->title }} </a>
