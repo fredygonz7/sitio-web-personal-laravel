@@ -15,6 +15,7 @@
                         @csrf
                         
                         <h1 class="display-4">@lang('Contact')</h1>
+                        <hr>
                         <div class="form-group">
                             <label for="name">{{ __('Name') }}</label>
                             <input type="text" name="name" id="name" class="form-control bg-ligth shadow-sm
@@ -46,11 +47,17 @@
 
                         <div class="form-group">
                             <label for="subject">{{ __('Subject') }}</label>
-                            <input type="text" name="subject" id="subject" class="form-control"
+                            <input type="text" name="subject" id="subject" class="form-control
+                            @error('name')
+                                is-invalid
+                            @enderror"
                                 placeholder="{{ __('Subject') }}..." aria-describedby="helpIdSubject"
                                 value="{{ old('subject') }}">
-                            <small id="helpIdSubject" class="text-muted">{!! $errors->first('subject', ':message')
-                                !!}</small>
+                            <small id="helpIdSubject" class="text-muted">
+                                @error('subject')
+                                {{ $message }}
+                                @enderror
+                            </small>
                         </div>
 
 
@@ -73,7 +80,7 @@
                         {!!  $errors->first('content', '<small>:message</small>') !!}
                     </div> --}}
                         {{-- <button class="pr">@lang('Send')</button> --}}
-                        <button type="button" class="btn btn-primary btn-lg btn-block">@lang('Send')</button>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">@lang('Send')</button>
                     </form>
                 @endif
             </div>
