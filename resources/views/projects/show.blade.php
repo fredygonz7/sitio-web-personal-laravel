@@ -10,10 +10,21 @@
             {{-- <p class="text-secondary">
                 {{ $project->description }}
             </p> --}}
-            <textarea id="textarea-description" class="text-secondary border-0 col-12" style="height: auto; padding: 0"  readonly rows="1">{{ $project->description }}</textarea>
+            <textarea id="textarea-description" 
+                class="text-secondary border-0 col-12" style="height: auto; padding: 1" 
+                readonly rows="2">{{ $project->description }}
+            </textarea>
             <script>
-                let description = document.getElementById("textarea-description")
-                description.style.cssText = 'height:' + (description.scrollHeight+25) + 'px';
+                let description = document.getElementById("textarea-description");
+                // let description_temporal = description.scrollHeight;
+                // window.addEventListener('resize', scroll_function);
+                // function scroll_function() {
+                //     description.style.cssText = 'height:' + (description.scrollHeight) + 'px';
+                // }
+                // console.log(description.scrollHeight);
+                if(description.scrollHeight>63)
+                    description.style.cssText = 'height:' + (description.scrollHeight+23) + 'px';
+                console.log(description.scrollHeight);
             </script>
             <p class="text-black-50">
                 {{ $project->created_at->diffForHumans() }}
@@ -36,9 +47,6 @@
                     </form>
                 @endauth
             </div>
-
-
-
         </div>
     </div>
 @endsection
