@@ -13,7 +13,7 @@
                     <hr>
                     @include('include.validation-errors')
 
-                    @include('include.session-status')
+                    {{-- @include('include.session-status') --}}
 
                     @include('projects._form', ['btnText' => __('Save')])
                 </form>

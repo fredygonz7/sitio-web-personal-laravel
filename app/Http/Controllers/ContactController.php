@@ -23,6 +23,6 @@ class ContactController extends Controller
         );
         Mail::to('fredgonz7@gmail.com')->queue(new MessageReceived($message));
         // return new MessageReceived($message);
-        return back()->with('status',__('We received your message, we will reply to you as soon as possible'));
+        return back()->with('status',__('Message sent'));
     }
 }

@@ -4,13 +4,17 @@
 
 @section('content')
     <div class="container">
-        <div class="bg-white py-5 px-4 shadow rounded">
+        <div class="bg-white py-5 px-4 shadow rounded flex-row">
 
             <h1 class="display-5">{{ $project->title }}</h1>
-            <p class="text-secondary">
+            {{-- <p class="text-secondary">
                 {{ $project->description }}
-            </p>
-
+            </p> --}}
+            <textarea id="textarea-description" class="text-secondary border-0 col-12" style="height: auto; padding: 0"  readonly rows="1">{{ $project->description }}</textarea>
+            <script>
+                let description = document.getElementById("textarea-description")
+                description.style.cssText = 'height:' + (description.scrollHeight+25) + 'px';
+            </script>
             <p class="text-black-50">
                 {{ $project->created_at->diffForHumans() }}
             </p>

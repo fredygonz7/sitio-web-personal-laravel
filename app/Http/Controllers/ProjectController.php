@@ -78,12 +78,19 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
         return view('projects.show', [
-            'project' => Project::findOrFail($id)
+            'project' => $project
         ]);
     }
+    // public function show($id)
+    // {
+    //     return view('projects.show', [
+    //         'project' => Project::findOrFail($id)
+    //     ]);
+    // }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -108,7 +115,7 @@ class ProjectController extends Controller
     public function update(SaveProjectRequest $request, Project $project)
     {
         $project->update($request->validated());
-        return redirect()->route('projects.show', $project);
+        return redirect()->route('projects.show', $project)->with('status', __('Updated project'));
     }
 
     /**
@@ -121,6 +128,6 @@ class ProjectController extends Controller
     {
         //Project::destroy($id);
         $project->delete();
-        return redirect()->route('projects.index');
+        return redirect()->route('projects.index')->with('status', __('Removed project'));
     }
 }
