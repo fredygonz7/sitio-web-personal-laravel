@@ -14,11 +14,11 @@
     <div id="app" class="d-flex flex-column h-screen justify-content-between">
         <header>
             @include('include/nav')
+            
+            @include('include.session-status')
         </header>
 
         <main class="py-4">
-
-            @include('include.session-status')
             
             @yield('content')
         </main>
